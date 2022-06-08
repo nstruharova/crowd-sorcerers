@@ -1,0 +1,173 @@
+{
+  "view": {
+    "type": "view.list",
+    "items": [
+      {
+        "type": "view.text",
+        "label": "Consider the word",
+        "content": {
+          "type": "data.input",
+          "path": "phrase"
+        }
+      },
+      {
+        "type": "view.text",
+        "label": "In this sentence",
+        "content": {
+          "type": "data.input",
+          "path": "sentence"
+        }
+      },
+      {
+        "type": "field.radio-group",
+        "validation": {
+          "type": "condition.required"
+        },
+        "label": "Which of the following best describes the meaning of the word",
+        "options": {
+          "type": "helper.transform",
+          "items": {
+            "type": "data.input",
+            "path": "sense"
+          },
+          "into": {
+            "label": {
+              "type": "data.local",
+              "path": "item"
+            },
+            "value": {
+              "type": "data.local",
+              "path": "item"
+            }
+          }
+        },
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        }
+      }
+    ]
+  },
+  "plugins": [
+    {
+      "1": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.0"
+        }
+      },
+      "2": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.1"
+        }
+      },
+      "3": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.2"
+        }
+      },
+      "4": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.3"
+        }
+      },
+      "5": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.4"
+        }
+      },
+      "6": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.5"
+        }
+      },
+      "7": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.6"
+        }
+      },
+      "8": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.7"
+        }
+      },
+      "9": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.8"
+        }
+      },
+      "0": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "answer"
+        },
+        "payload": {
+          "type": "data.input",
+          "path": "sense.9"
+        }
+      },
+      "type": "plugin.hotkeys"
+    },
+    {
+      "type": "plugin.toloka",
+      "layout": {
+        "kind": "scroll",
+        "taskWidth": 500
+      }
+    }
+  ]
+}

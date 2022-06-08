@@ -1,2 +1,2 @@
-# crowd-sorcerers
-We should change the repo name when we know which project we have
+# The Crowd Sorcerers
+A group project for Crowd Computing @ TUDelft
