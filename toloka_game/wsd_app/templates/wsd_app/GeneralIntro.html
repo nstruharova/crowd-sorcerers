@@ -1,0 +1,52 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="card bg-light m-3">
+    <div class="card-header">
+        Instruction
+    </div>
+    <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+             <li class="list-group-item  ">
+                During this study, you work together in groups of three.
+            </li>
+            <li class="list-group-item  ">
+                You will be shown an ambiguous word in a sentence + some possible meanings for that word.
+            </li>
+            <li class="list-group-item  ">
+                Your goal is to select the meaning that fits best given the current sentence.
+            </li>
+            <li class="list-group-item">
+                You will play {{ Constants.num_rounds }} rounds in total.
+            </li>
+            <li class="list-group-item  ">
+                If everyone agrees on the meaning, you'll go through to the next round.
+                <b><u><span class="text-danger">You also earn the most points so do your best!</span></u></b>
+            </li>
+            <li class="list-group-item">
+                When there is disagreement, you should chat with each other to reach an agreement.
+                <b><u><span class="text-danger">Please keep it civil!</span></u></b>
+            </li>
+            <li class="list-group-item">
+                        Your earnings during the study are measured in points, and at the end of the study they are exchanged at the rate of:
+                    </li>
+                    <li class="list-group-item text-center lead">
+                        100 points  = 100 cents or $1
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+    {% next_button %}
+
+{% endblock %}

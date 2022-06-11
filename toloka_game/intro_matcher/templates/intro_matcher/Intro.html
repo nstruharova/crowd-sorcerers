@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block content %}
+
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        During this experiment, you will cooperate with other participants <b>in realtime</b>.
+                    </li>
+                    <li class="list-group-item">
+                        If one of the participants leaves the study, your participation <b>will also end.</b>
+                        <u><b><span class="text-danger"> You will still get paid to participate though!</span></b></u>
+                    </li>
+                    <li class="list-group-item">
+                        In the course of the study, you and other Toloka participants from the same group as you can make decisions
+                        that affect the size of your bonus..
+                    </li>
+                    <li class="list-group-item">
+                        Your earnings during the study are measured in points, and at the end of the study they are exchanged at the rate of:
+                    </li>
+                    <li class="list-group-item text-center lead">
+                        100 points = 100 cents or $1
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="text-danger my-3">
+        {% formfields %}
+    </div>
+    {% next_button %}
+{% endblock %}

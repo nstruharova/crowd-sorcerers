@@ -1,0 +1,39 @@
+{% extends "global/Page.html" %}
+
+
+{% block progress %}
+
+{% endblock %}
+
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="card">
+        <div class="card-body">
+            <div class="lead text-center">
+                Unfortunately, one of your group members left the session.
+            </div>
+            <div class="lead text-center">
+                You will still get paid for your participation!
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="lead text-center">Your code:
+                <div class="text-center"><span class="font-weight-bold display-4">{{ participant.code }}</span>
+                </div>
+            </div>
+            <div class="lead my-3  ">
+                In order for the task to be considered completed, please copy the code above and paste it on the task page in Toloka.
+            </div>
+        </div>
+    </div>
+
+    <button class="d-none">Next</button>
+{% endblock %}

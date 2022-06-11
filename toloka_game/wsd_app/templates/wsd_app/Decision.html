@@ -1,0 +1,22 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block visibletitle %}
+    Round {{ view.round_number }} of {{ Constants.num_rounds }}
+{% endblock %}
+
+{% block content %}
+    Pick a sense for the following phrase:
+
+
+    {% formfields %}
+
+    {% next_button %}
+
+{#    Chat:#}
+{#    {% chat %}#}
+
+    Instructions:
+    {% include Constants.instructions_template %}
+
+{% endblock %}

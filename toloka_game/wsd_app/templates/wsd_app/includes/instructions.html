@@ -1,0 +1,27 @@
+{% load otree %}
+
+<div class="card bg-light m-3">
+    <div class="card-header">
+        Game Rules
+    </div>
+    <div class="card-body">
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                In this game you have to select the correct meaning for ambiguous words.
+            </li>
+            <li class="list-group-item">
+                You earn the most points if you do it correctly the first time
+            </li>
+            <li class="list-group-item">
+                Whenever the whole team agrees you'll win {{ Constants.initial_agreement }} points.
+                If you come to an agreement after initial disagreement you'll win {{ Constants.eventual_agreement }} points.
+                If you disagree you'll win {{ Constants.disagreement }} points.
+            </li>
+            <li class="list-group-item">
+                <b><u><span class="text-danger">Attempts at cheating will get you disqualified for any compensation.</span></u></b>
+            </li>
+
+        </ul>
+    </div>
+</div>
