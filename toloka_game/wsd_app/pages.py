@@ -5,6 +5,8 @@ from .models import Constants
 from django.utils import timezone
 from django.utils.timezone import now
 
+from wsd_app import dataset
+
 class FirstWP(DecisionWP):
     group_by_arrival_time = True
 
@@ -37,16 +39,16 @@ class Introduction(BlockingPage):
 
 
 class Decision(GeneralDecisionPage):
-
     def vars_for_template(self):
         self.participant.vars.setdefault(f'start_time_{self.round_number}', timezone.now())
-        return dict()
+        fields = dataset.get_wsd_data()
+        return dict(fields=fields, is_agreement=False)
 
     def get_timeout_seconds(self):
         return self.session.config.get('time_for_decision', Constants.time_for_decision)
 
     def before_next_page(self):
-        self.player.time_for_decision = (
+        self.player.time_for_decision_when_disagreement_occurred = (
                     timezone.now() - self.participant.vars.get(f'start_time_{self.round_number}',
                                                                timezone.now())).total_seconds()
 
@@ -55,9 +57,33 @@ class Decision(GeneralDecisionPage):
 
 
 class ResultsWaitPage(DecisionWP):
-    after_all_players_arrive = 'set_payoffs'
+    after_all_players_arrive = 'set_initial_payoffs'
     body_text = "Please wait until the other players have made their choice"
 
+class ResultsDisagreementWaitPage(DecisionWP):
+    after_all_players_arrive = 'set_final_payoffs'
+    body_text = "Please wait until the other players have made their choice"
+
+
+class DecisionDisagreement(BlockingPage):
+    form_model = 'player'
+    form_fields = ['decision']
+
+    def vars_for_template(self):
+        self.participant.vars.setdefault(f'start_time_{self.round_number}', timezone.now())
+        fields = dataset.get_wsd_data()
+        return dict(fields=fields, is_agreement=self.group.is_initial_agreement)
+
+    def is_displayed(self):
+        return self.group.is_initial_agreement is False and super().is_displayed()
+
+    def get_timeout_seconds(self):
+        return self.session.config.get('time_for_decision', Constants.time_for_decision)
+
+    def before_next_page(self):
+        self.player.time_for_initial_decision = (
+                    timezone.now() - self.participant.vars.get(f'start_time_{self.round_number}',
+                                                               timezone.now())).total_seconds()
 
 class Results(BlockingPage):
     def get_timeout_seconds(self):
@@ -79,6 +105,8 @@ page_sequence = [
     Introduction,
     Decision,
     ResultsWaitPage,
+    DecisionDisagreement,
+    ResultsDisagreementWaitPage,
     Results,
     FinalResults
 ]

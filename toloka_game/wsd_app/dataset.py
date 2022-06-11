@@ -4,6 +4,13 @@ import json
 # in_json = json.load(open("toloka_data.json", 'r'))
 
 
+def get_wsd_data():
+    return dict(
+        phrase=PHRASE,
+        sentence=SENTENCE,
+        senses=SENSES
+    )
+
 PHRASE = "This is the ambiguous word"
 SENTENCE = "here is the sentence with the ambiguous word"
 SENSES = [
