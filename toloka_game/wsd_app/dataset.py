@@ -1,15 +1,16 @@
 # parse dataset, and fill in these variables for the whole group
 import json
-
-# in_json = json.load(open("toloka_data.json", 'r'))
+import random
+# in_json = json.load(open("confusing_phrases.json", 'r'))
 
 
 def get_wsd_data():
     return dict(
         phrase=PHRASE,
         sentence=SENTENCE,
-        senses=SENSES
+        senses=random.shuffle(SENSES)  # randomize the order of senses for each player
     )
+
 
 PHRASE = "This is the ambiguous word"
 SENTENCE = "here is the sentence with the ambiguous word"
