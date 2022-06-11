@@ -111,7 +111,6 @@ class Player(BasePlayer):
     intermediary_payoff = models.CurrencyField()  # this fields hold what the payment will be in this round
     payable_round = models.IntegerField()
 
-
     def outcome(self):
         if int(self.intermediary_payoff) == int(Constants.initial_agreement):
             return 'Your team agrees with you, congratulations!'

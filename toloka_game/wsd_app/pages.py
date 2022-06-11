@@ -7,6 +7,7 @@ from django.utils.timezone import now
 
 from wsd_app import dataset
 
+
 class FirstWP(DecisionWP):
     group_by_arrival_time = True
 
@@ -60,6 +61,7 @@ class ResultsWaitPage(DecisionWP):
     after_all_players_arrive = 'set_initial_payoffs'
     body_text = "Please wait until the other players have made their choice"
 
+
 class ResultsDisagreementWaitPage(DecisionWP):
     after_all_players_arrive = 'set_final_payoffs'
     body_text = "Please wait until the other players have made their choice"
@@ -84,6 +86,7 @@ class DecisionDisagreement(BlockingPage):
         self.player.time_for_initial_decision = (
                     timezone.now() - self.participant.vars.get(f'start_time_{self.round_number}',
                                                                timezone.now())).total_seconds()
+
 
 class Results(BlockingPage):
     def get_timeout_seconds(self):
