@@ -5,8 +5,6 @@ from .models import Constants
 from django.utils import timezone
 from django.utils.timezone import now
 
-from wsd_app import dataset
-
 
 class FirstWP(DecisionWP):
     group_by_arrival_time = True
@@ -42,9 +40,7 @@ class Introduction(BlockingPage):
 class Decision(GeneralDecisionPage):
     def vars_for_template(self):
         self.participant.vars.setdefault(f'start_time_{self.round_number}', timezone.now())
-        fields = dataset.get_wsd_data(self.round_number)
-        return dict(fields=fields, is_agreement=False)
-        # return dict()
+        return dict()
 
     def get_timeout_seconds(self):
         return self.session.config.get('time_for_decision', Constants.time_for_decision)

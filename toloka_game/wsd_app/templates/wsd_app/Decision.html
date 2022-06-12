@@ -6,14 +6,24 @@
 {% endblock %}
 
 {% block content %}
-    Find the meaning for the following word: <br> {{ player.phrase }} <br>
-    In the following sentence: <br> {{ player.sentence }}
-
-    {% formfields %}
+    <div class="card my-3">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <p class="font-weight-bold">Find the meaning for the following word:</p>  {{ player.phrase }}
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <p class="font-weight-bold">In the following sentence:</p> {{ player.sentence }}
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    {% formfields %}
+                </li>
+            </ul>
+        </div>
+    </div>
 
     {% next_button %}
 
-    Instructions:
     {% include Constants.instructions_template %}
 
 {% endblock %}

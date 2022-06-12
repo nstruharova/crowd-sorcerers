@@ -14,15 +14,6 @@ SESSION_CONFIGS = [
             'last'
         ]
     ),
-    dict(
-        name='basicq_toloka',
-        language='en',
-        for_toloka=True,
-        num_demo_participants=1,
-        app_sequence=[
-            'basicq',
-        ]
-    ),
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -33,8 +24,8 @@ SESSION_CONFIGS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.01, participation_fee=0.02, doc="", min_length='15 min',
     toloka_participation_fee=1,
-    time_for_decision=60,
-    time_for_instructions=90,
+    time_for_decision=90,
+    time_for_instructions=60,
     matching_waiting_time=90,
     mturk_hit_settings=dict(
         keywords='30 seconds demographic study',

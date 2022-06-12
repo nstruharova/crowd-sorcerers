@@ -8,7 +8,6 @@ from otree.api import (
     Currency as c,
     currency_range,
 )
-from wsd_app import dataset
 from os import environ
 import random
 import json
@@ -22,10 +21,10 @@ class Constants(BaseConstants):
     name_in_url = 'wsd'
     players_per_group = 3
     num_others = players_per_group - 1
-    num_rounds = int(environ.get('WSD_ROUNDS', 3))
+    num_rounds = int(environ.get('WSD_ROUNDS', 5))
     instructions_template = 'wsd_app/includes/instructions.html'
     currency_name = 'dollar'
-    time_for_decision = 60
+    time_for_decision = 90
     time_for_instructions = 60
     wsd_wp_max_waiting_time = 60
 
@@ -39,10 +38,8 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     def creating_session(self):
-        print(self.round_number)
-
         current_task = Constants.dataset[self.round_number-1]
-        # dataset.get_wsd_data(self.round_number-1)
+
         # select which round will be paid out, this is unique for each player
         if self.round_number == 1:
             for p in self.session.get_participants():
@@ -51,16 +48,11 @@ class Subsession(BaseSubsession):
         for p in self.get_players():
             p.payable_round = p.participant.vars.get('payable_round')
 
+            # fill in dataset for each player/round
             p.phrase = current_task['phrase']
             p.sentence = current_task['sentence']
             senses_as_string = ';;'.join(current_task['sense'])
-            print('sense as string:')
-            print(senses_as_string)
-            print('sense as list')
-            print(senses_as_string.split(';;'))
-            # print(current_task['sense'])
             p.senses = senses_as_string
-
 
 
 class Group(BaseGroup):
@@ -141,29 +133,24 @@ class Player(BasePlayer):
         return self.subsession.current_task['sense']
 
     written_outcome = models.StringField()    # this field hold the outcome
-    initial_decision = models.StringField()  # stores the initial decision that is compared in case of a disagreement
+    initial_decision = models.IntegerField()  # stores the initial decision that is compared in case of a disagreement
 
     phrase = models.StringField()
     sentence = models.StringField()
     senses = models.StringField()
 
-    decision = models.StringField(label='Senses:',
-                                   # choices=senses,
+    decision = models.IntegerField(label='Senses:',
                                    widget=widgets.RadioSelect)
 
+    # Select and randomize the senses for the sense picker
     def decision_choices(self):
-        import random
         senses = self.senses
-        # print(self.subsession.current_task)
-        print(self.round_number)
-        choices = senses.split(';;')
+        senses = senses.split(';;')
+        choices = []
+        for idx, sense in enumerate(senses):
+            choices.append((idx, sense))
         random.shuffle(choices)
         return choices
-
-def choice_choices(player: Player):
-    return [
-        player.senses.split(';;')
-    ]
 
 def custom_export(players):
     players = players.filter(participant__label__isnull=False)
