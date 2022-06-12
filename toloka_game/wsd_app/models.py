@@ -21,7 +21,7 @@ class Constants(BaseConstants):
     name_in_url = 'wsd'
     players_per_group = 3
     num_others = players_per_group - 1
-    num_rounds = int(environ.get('WSD_ROUNDS', 5))
+    num_rounds = int(environ.get('WSD_ROUNDS', 2))
     instructions_template = 'wsd_app/includes/instructions.html'
     currency_name = 'dollar'
     time_for_decision = 90
@@ -41,12 +41,12 @@ class Subsession(BaseSubsession):
         current_task = Constants.dataset[self.round_number-1]
 
         # select which round will be paid out, this is unique for each player
-        if self.round_number == 1:
-            for p in self.session.get_participants():
-                p.vars['payable_round'] = random.randint(1, Constants.num_rounds)
+        # if self.round_number == 1:
+        #     for p in self.session.get_participants():
+        #         p.vars['payable_round'] = random.randint(1, Constants.num_rounds)
         # check if this is the round that get paid out
         for p in self.get_players():
-            p.payable_round = p.participant.vars.get('payable_round')
+            # p.payable_round = p.participant.vars.get('payable_round')
 
             # fill in dataset for each player/round
             p.phrase = current_task['phrase']
@@ -80,8 +80,12 @@ class Group(BaseGroup):
         for p in self.get_players():
             p.initial_decision = p.decision
             p.written_outcome = p.outcome()
-            if p.payable_round == self.round_number:
-                p.payoff = p.intermediary_payoff
+
+            if self.is_initial_agreement is True:
+                p.payoff += p.intermediary_payoff
+
+            # if p.payable_round == self.round_number:
+            #     p.payoff = p.intermediary_payoff
 
     def set_final_payoffs(self):
         p1 = self.get_player_by_id(1)
@@ -99,8 +103,10 @@ class Group(BaseGroup):
                     p.intermediary_payoff = Constants.eventual_agreement
 
                 p.written_outcome = p.outcome()
-                if p.payable_round == self.round_number:
-                    p.payoff = p.intermediary_payoff
+                if self.is_initial_agreement is False:  # do not double count
+                    p.payoff += p.intermediary_payoff
+                # if p.payable_round == self.round_number:
+                # p.payoff = p.intermediary_payoff
         else:
             p1.intermediary_payoff = Constants.disagreement
             p2.intermediary_payoff = Constants.disagreement
@@ -113,13 +119,13 @@ class Player(BasePlayer):
         return self.intermediary_payoff.to_real_world_currency(self.session)
 
     def payoff_in_real_currency(self):
-        return self.in_round(self.payable_round).payoff.to_real_world_currency(self.session)
+        return self.participant.payoff.to_real_world_currency(self.session)
 
     time_for_initial_decision = models.FloatField()    # time it takes to make initial decision
     time_for_decision_when_disagreement_occurred = models.FloatField()    # time it takes when there is a disagreement
 
     intermediary_payoff = models.CurrencyField()  # this fields hold what the payment will be in this round
-    payable_round = models.IntegerField()
+    # payable_round = models.IntegerField()
 
     def outcome(self):
         if int(self.intermediary_payoff) == int(Constants.initial_agreement):

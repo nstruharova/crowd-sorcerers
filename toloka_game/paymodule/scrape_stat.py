@@ -12,7 +12,7 @@ payload = json.dumps({
             "category": "profile",
             "key": "citizenship",
             "operator": "EQ",
-            "value": "RU"
+            "value": "en"
           }
         ]
       }

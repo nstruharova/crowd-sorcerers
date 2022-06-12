@@ -1,4 +1,4 @@
-# some consntants (like host urls) go here.
+# some constants (like host urls) go here.
 REAL_HOST = 'https://toloka.yandex.ru'
 SANDBOX_HOST = 'https://sandbox.toloka.yandex.ru'
 DEFAULT_ACCEPT_MSG = 'Thank you!'
@@ -175,7 +175,7 @@ class TolokaClient:
 
         url = self.get_bonus_url()
         method = 'POST'
-        # todo: error handnling
+        # todo: error handling
         r = self.request_to_toloka(url, method, payload)
         return TolokaResponse(**r)
 

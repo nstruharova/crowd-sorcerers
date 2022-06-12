@@ -5,7 +5,7 @@ from csv import DictWriter
 load_dotenv()  # take environment variables from .env.
 """
 What do we do here:
-1. Read csv with the follwoing columns: assignment id, payoff, message
+1. Read csv with the following columns: assignment id, payoff, message
 1.2. Read log
 2. loop through and pay bonuses for each user in assigment id. Prior: check if assignment is not in log
 3. log them into a log
@@ -14,7 +14,7 @@ from toloka import TolokaClient
 from pprint import pprint
 
 client = TolokaClient(sandbox=False)
-DEFAULT_TITLE = 'Спасибо за ваше участие!'
+DEFAULT_TITLE = 'Thanks for your participation!'
 
 
 def get_assignment_info(assignment_id):
@@ -61,7 +61,7 @@ def accept_and_pay():
             # if row.bonus>10:
             #     print(row)
             #     raise Exception('too large bonus')
-            # pay_bonus(user_id=user_id, bonus=row.bonus, title='Спасибо', message=row.msg)
+            # pay_bonus(user_id=user_id, bonus=row.bonus, title='Thanks', message=row.msg)
             print(f'{counter}: Assignment {row.assignment_id} accepted, paid to user {user_id}')
             writer.writerow(newrow)
             counter += 1

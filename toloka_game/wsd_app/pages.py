@@ -96,7 +96,7 @@ class FinalResults(BlockingPage):
         return self.round_number == Constants.num_rounds and super().is_displayed()
 
     def before_next_page(self):
-        self.participant.vars['payable'] = True
+        # self.participant.vars['payable'] = True
         self.participant.vars['payoff_in_real_currency'] = self.player.payoff_in_real_currency()
 
 

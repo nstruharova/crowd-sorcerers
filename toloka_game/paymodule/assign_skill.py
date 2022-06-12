@@ -5,7 +5,7 @@ from csv import DictWriter
 load_dotenv()  # take environment variables from .env.
 """
 What do we do here:
-1. Read csv with the follwoing columns: assignment id, payoff, message
+1. Read csv with the following columns: assignment id, payoff, message
 1.2. Read log
 2. loop through and pay bonuses for each user in assigment id. Prior: check if assignment is not in log
 3. log them into a log
