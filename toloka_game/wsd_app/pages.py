@@ -42,8 +42,9 @@ class Introduction(BlockingPage):
 class Decision(GeneralDecisionPage):
     def vars_for_template(self):
         self.participant.vars.setdefault(f'start_time_{self.round_number}', timezone.now())
-        fields = dataset.get_wsd_data()
+        fields = dataset.get_wsd_data(self.round_number)
         return dict(fields=fields, is_agreement=False)
+        # return dict()
 
     def get_timeout_seconds(self):
         return self.session.config.get('time_for_decision', Constants.time_for_decision)
@@ -73,8 +74,9 @@ class DecisionDisagreement(BlockingPage):
 
     def vars_for_template(self):
         self.participant.vars.setdefault(f'start_time_{self.round_number}', timezone.now())
-        fields = dataset.get_wsd_data()
-        return dict(fields=fields, is_agreement=self.group.is_initial_agreement)
+        # fields = dataset.get_wsd_data(self.round_number)
+        # return dict(fields=fields, is_agreement=self.group.is_initial_agreement)
+        return dict()
 
     def is_displayed(self):
         return self.group.is_initial_agreement is False and super().is_displayed()

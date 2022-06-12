@@ -1,22 +1,25 @@
 # parse dataset, and fill in these variables for the whole group
 import json
 import random
-# in_json = json.load(open("confusing_phrases.json", 'r'))
 
+PHRASE = 'example phrase'
+SENTENCE = 'example sentence'
+SENSES = ['example 1', 'example 2', 'example 3']
+in_json = json.load(open('wsd_app/confusing_phrases.json', 'r'))
 
-def get_wsd_data():
+def get_wsd_data(idx):
+    global SENSES
+    PHRASE = in_json[idx]['phrase']
+    SENTENCE = in_json[idx]['sentence']
+    SENSES = in_json[idx]['sense']
+    # print(PHRASE)
+    # print(SENTENCE)
+    print("we're in the get_wsd function")
+    print(SENSES)
     return dict(
         phrase=PHRASE,
         sentence=SENTENCE,
-        senses=random.shuffle(SENSES)  # randomize the order of senses for each player
+        senses=SENSES  # randomize the order of senses for each player
     )
 
 
-PHRASE = "This is the ambiguous word"
-SENTENCE = "here is the sentence with the ambiguous word"
-SENSES = [
-    (0, "sense option 1"),
-    (1, "sense option 2"),
-    (2, "this is sense 3"),
-]
-GOLDEN = 1
