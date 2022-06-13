@@ -1,4 +1,4 @@
-Originally created by _Philipp Chapkovski_
+Inspired by work of _Philipp Chapkovski_ (https://github.com/chapkovski/toloka_games)
 # _"Wisdom of the Crowd for WSD problems "_
 
 ## Quick Start

@@ -21,7 +21,7 @@ class Constants(BaseConstants):
     name_in_url = 'wsd'
     players_per_group = 3
     num_others = players_per_group - 1
-    num_rounds = int(environ.get('WSD_ROUNDS', 10))
+    num_rounds = int(environ.get('WSD_ROUNDS', 2))
     instructions_template = 'wsd_app/includes/instructions.html'
     currency_name = 'dollar'
     time_for_decision = 90
