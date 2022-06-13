@@ -1,4 +1,6 @@
+# oTree-may-not-overwrite-this-file
 otree[mturk]==3.4.0
 psycopg2-binary==2.8.6
 pandas
+sentry-sdk==0.7.9
 django_user_agents
