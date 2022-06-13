@@ -21,7 +21,7 @@ class Constants(BaseConstants):
     name_in_url = 'wsd'
     players_per_group = 3
     num_others = players_per_group - 1
-    num_rounds = int(environ.get('WSD_ROUNDS', 2))
+    num_rounds = int(environ.get('WSD_ROUNDS', 10))
     instructions_template = 'wsd_app/includes/instructions.html'
     currency_name = 'dollar'
     time_for_decision = 90
@@ -32,8 +32,8 @@ class Constants(BaseConstants):
 
     # score for each case
     disagreement = c(0)
-    initial_agreement = c(3)
-    eventual_agreement = c(1)
+    initial_agreement = c(10)
+    eventual_agreement = c(3)
 
 
 class Subsession(BaseSubsession):
@@ -157,6 +157,7 @@ class Player(BasePlayer):
             choices.append((idx, sense))
         random.shuffle(choices)
         return choices
+
 
 def custom_export(players):
     players = players.filter(participant__label__isnull=False)

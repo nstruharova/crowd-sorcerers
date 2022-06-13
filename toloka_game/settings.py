@@ -22,7 +22,7 @@ SESSION_CONFIGS = [
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.01, participation_fee=0.02, doc="", min_length='15 min',
+    real_world_currency_per_point=0.01, participation_fee=0.05, doc="", min_length='15 min',
     toloka_participation_fee=1,
     time_for_decision=90,
     time_for_instructions=60,
