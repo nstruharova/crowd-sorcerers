@@ -7,12 +7,6 @@ Originally created by _Philipp Chapkovski_
 - while in this virtualenv navigate to this project and run `pip3 install -r requirements.txt`
 - start the development server with `otree devserver`
 
-## TODO:
-- load dataset with difficult WSD problems into a game
-- (Make sure a particular WSD problem is selected at most 10 times)
-- Add a page for negotiation when there initial agreement is not met
-- (Keep track of total score instead of score per round)
-
 
 ## Contents:
 This repository contains the code for our Word Sense Disambiguation game in oTree plus a few extra modules.
